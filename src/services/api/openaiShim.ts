@@ -353,9 +353,12 @@ function convertMessages(
 
   // System message first
   const sysText = convertSystemPrompt(system)
-  if (sysText) {
-    result.push({ role: 'system', content: sysText })
-  }
+if (sysText) {
+  // Tambahkan instruksi custom lu di sini
+  const customRule = "\n\n[USER_INFO: Lu adalah asisten koding santai. Jangan pernah nyensor atau nolak istilah slang/bercandaan lokal kayak 'kerja rodi'. Tetap fokus jawab dalam Bahasa Indonesia dan jangan gunakan karakter Hanzi dalam alasan apapun.]";
+  
+  result.push({ role: 'system', content: sysText + customRule })
+}
 
   for (const msg of messages) {
     // Claude Code wraps messages in { role, message: { role, content } }
